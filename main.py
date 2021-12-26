@@ -1,5 +1,18 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
 
-DRIVER_PATH = '/path/to/chromedriver'
-driver = webdriver.Chrome(executable_path=DRIVER_PATH)
-driver.get('https://google.com')
+# Install chrome drivers
+s=Service(ChromeDriverManager().install())
+
+# Setup options for headless chrome
+options = Options()
+options.headless = True
+
+# Start the chrome driver
+driver = webdriver.Chrome(options=options, service=s)
+driver.get('https://thaomar.com/')
+
+
+breakpoint()
