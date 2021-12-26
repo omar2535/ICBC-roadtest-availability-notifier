@@ -1,18 +1,8 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
+from driver_utils.login import perform_login
+from driver_utils.startup import startup
 
-# Install chrome drivers
-s=Service(ChromeDriverManager().install())
+# Start-up the chrome driver
+driver = startup()
 
-# Setup options for headless chrome
-options = Options()
-options.headless = True
-
-# Start the chrome driver
-driver = webdriver.Chrome(options=options, service=s)
-driver.get('https://thaomar.com/')
-
-
-breakpoint()
+# Perform login
+perform_login(driver)
