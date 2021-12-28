@@ -6,3 +6,5 @@ driver = startup()
 
 # Perform login
 perform_login(driver)
+
+breakpoint()
