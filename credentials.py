@@ -1,0 +1,5 @@
+"""For credentials"""
+
+DRIVERS_LAST_NAME = "COOL"
+LICENCE_NUMBER = "0000000"
+KEYWORD = "HONEYPOT"
