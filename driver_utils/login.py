@@ -2,7 +2,7 @@
 Performs login for the user
 """
 from selenium import webdriver
-from CREDENTIALS import DRIVERS_LAST_NAME, KEYWORD, LICENCE_NUMBER
+from CONFIG import DRIVERS_LAST_NAME, KEYWORD, LICENCE_NUMBER
 from driver_utils.utils import wait_for_page_to_load
 from selenium.webdriver.common.by import By
 

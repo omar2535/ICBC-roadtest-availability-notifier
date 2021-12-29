@@ -2,4 +2,4 @@
 __pycache__/
 
 # Config files
-CREDENTIALS.py
+CONFIG.py

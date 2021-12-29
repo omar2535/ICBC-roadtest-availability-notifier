@@ -3,7 +3,7 @@ Functions for the booking page
 """
 import time
 from selenium import webdriver
-from CREDENTIALS import CONFIG
+from CONFIG import CONFIG
 from driver_utils.utils import wait_for_page_to_load
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
