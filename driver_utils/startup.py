@@ -12,7 +12,7 @@ def startup() -> webdriver.Chrome:
         webdriver.Chrome: chrome web driver
     """
     # Install chrome drivers
-    s=Service(ChromeDriverManager().install())
+    s = Service(ChromeDriverManager().install())
 
     # Setup options for headless chrome
     options = Options()
