@@ -1,4 +1,3 @@
-import time
 from driver_utils.searcher import search_for_bookings
 from driver_utils.login import perform_login
 from driver_utils.startup import startup
@@ -12,9 +11,6 @@ driver.get(BOOK_A_ROAD_TEST_HOME)
 
 # Perform login
 perform_login(driver)
-
-# Wait a bit
-time.sleep(1)
 
 # Search for bookings
 search_for_bookings(driver)
