@@ -1,5 +1,5 @@
 import time
-from driver_utils.booker import search_for_bookings
+from driver_utils.searcher import search_for_bookings
 from driver_utils.login import perform_login
 from driver_utils.startup import startup
 from CONSTANTS import BOOK_A_ROAD_TEST_HOME
