@@ -2,15 +2,19 @@
 Functions for the search page
 """
 import time
+import json
+from typing import Dict, List
 from selenium import webdriver
 from CONFIG import CONFIG
-from driver_utils.utils import get_all_elements_of_web_element, wait_for_page_to_load
+from CONSTANTS import GET_AVAILABLE_APPOINTMENTS
+from driver_utils.utils import filter_perf_logs, get_all_elements_of_web_element, wait_for_page_to_load, log_filter
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.remote.webelement import WebElement
 
 '''Class selectors'''
 ICBC_LOCATION_RESULTS_CLASS = "results-title"
+ICBC_LOCATION_AVAILIBILITY_CLASS = "location-title"
 
 '''ID SELECTORS'''
 LOCATION_FIELD_ID = "mat-input-3"
@@ -56,16 +60,16 @@ def search_for_bookings(driver: webdriver.Chrome):
     # Click the search button
     driver.find_element_by_css_selector(SEARCH_BUTTON_CSS_SELECTOR).click()
 
-    # TODO: Need to take config and click on the ICBC location user wants
-    parse_icbc_location_results(driver)
-    breakpoint()
 
 
-def parse_icbc_location_results(driver: webdriver.Chrome):
+def parse_icbc_locations_results(driver: webdriver.Chrome) -> List[WebElement]:
     """Searches for bookings based on config
 
     Args:
         driver (webdriver.Chrome): Webdriver
+
+    Returns:
+        List[WebElement]: List of possible locations for ICBC testing centers
     """
     
     # Wait for page to load
@@ -75,7 +79,36 @@ def parse_icbc_location_results(driver: webdriver.Chrome):
     results: WebElement = driver.find_element_by_css_selector(ICBC_LOCATION_RESULTS_CSS_SELECTOR)
     results_arr = get_all_elements_of_web_element(results)
     
+    # Throw away the first element
+    results_arr = results_arr[1:]
     
-    breakpoint()
+    return results_arr
     
+
+def get_icbc_location_availability(driver: webdriver.Chrome, element: WebElement) -> List[Dict]:
+    """Get ICBC location availability
+
+    Args:
+        driver (webdriver.Chrome): Chrome web driver
+        element (WebElement): Clickable element that brings driver to availability page
+
+    Returns:
+        List[Dict]: List of availability objects
+    """
     
+    # Click on the location and wait for XHR response
+    element.click()
+    time.sleep(5)
+    
+    # Get the XHR response
+    logs_raw = driver.get_log("performance")
+    logs = [json.loads(lr["message"])["message"] for lr in logs_raw]
+    
+    # Filter for the endpoint we are querying for
+    log = filter_perf_logs(logs, GET_AVAILABLE_APPOINTMENTS)[0]
+    response_body = driver.execute_cdp_cmd(
+        "Network.getResponseBody", {"requestId": log["params"]["requestId"]}
+    )
+    
+    # Return the body which contains availabilities
+    return response_body['body']

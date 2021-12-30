@@ -10,3 +10,8 @@ DEBUG = True
 
 # URLs
 BOOK_A_ROAD_TEST_HOME = "https://onlinebusiness.icbc.com/webdeas-ui/home"
+
+
+
+# XHR URLS
+GET_AVAILABLE_APPOINTMENTS = "https://onlinebusiness.icbc.com/deas-api/v1/web/getAvailableAppointments"

@@ -35,3 +35,19 @@ def get_all_elements_of_web_element(element: WebElement) -> List[WebElement]:
         List[WebElement]: Array of child webElements
     """
     return element.find_elements(By.XPATH, './*')
+
+
+def filter_perf_logs(logs, url):
+    result = []
+    for log in logs:
+        if log_filter(log, url):
+            result.append(log)
+    return result
+
+# Filter for logs
+def log_filter(log, url):
+    return (
+        log["method"] == "Network.responseReceived" and
+        log["params"]["response"]["url"] == url
+        and "json" in log["params"]["response"]["mimeType"]
+    )
