@@ -93,3 +93,8 @@ pip install -r requirements.txt
 ```sh
 python main.py
 ```
+
+## TODO
+
+- Periodically check for availabilities without having to re-launch selenium and log in every time
+- Allow people who already have a booking to also find new bookings
