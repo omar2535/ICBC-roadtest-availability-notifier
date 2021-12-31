@@ -97,7 +97,11 @@ pip install -r requirements.txt
 python main.py
 ```
 
+## Sample email notification
+
+The email notification will look like the following:
+
+![Sample_email_notification](docs/images/sample_email_notification.png)
 ## TODO
 
-- Periodically check for availabilities without having to re-launch selenium and log in every time
 - Allow people who already have a booking to also find new bookings
