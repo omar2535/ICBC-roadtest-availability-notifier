@@ -106,7 +106,7 @@ def get_icbc_location_availability(driver: webdriver.Chrome, element: WebElement
     
     # Click on the location and wait for XHR response
     element.click()
-    time.sleep(5)
+    time.sleep(3)
     
     # Get the XHR response
     logs_raw = driver.get_log("performance")
@@ -119,4 +119,4 @@ def get_icbc_location_availability(driver: webdriver.Chrome, element: WebElement
     )
     
     # Return the body which contains availabilities
-    return response_body['body']
+    return json.loads(response_body['body'])

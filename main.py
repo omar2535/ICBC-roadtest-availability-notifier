@@ -1,7 +1,9 @@
+from CONFIG import ICBC_CENTER
 from driver_utils.searcher import get_icbc_location_availability, parse_icbc_locations_results, search_for_bookings
 from driver_utils.login import perform_login
 from driver_utils.startup import startup
 from CONSTANTS import BOOK_A_ROAD_TEST_HOME
+from utils.availability_parser import check_available_dates_matches_config
 
 # Start-up the chrome driver
 driver = startup()
@@ -18,9 +20,10 @@ search_for_bookings(driver)
 # Parse location results
 location_results = parse_icbc_locations_results(driver)
 
-breakpoint()
-
 # Check one of the location's availability
-availabilty = get_icbc_location_availability(driver, location_results[1])
+availability = get_icbc_location_availability(driver, location_results[ICBC_CENTER])
+
+# Notifty user if there's availability matching preferences
+matched_appointments = check_available_dates_matches_config(availability)
 
 breakpoint()
