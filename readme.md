@@ -1,5 +1,7 @@
 # ICBC roadtest booker
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/d26c9e9a6af655061b8d/maintainability)](https://codeclimate.com/github/omar2535/ICBC-roadtest-availability-notifier/maintainability)
+
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![Selenium](https://img.shields.io/badge/Selenium-43B02A?style=for-the-badge&logo=Selenium&logoColor=white)
 
