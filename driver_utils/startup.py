@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
-from CONSTANTS import DEBUG
+from CONFIG import DEBUG
 
 def startup() -> webdriver.Chrome:
     """Starts up chrome web driver

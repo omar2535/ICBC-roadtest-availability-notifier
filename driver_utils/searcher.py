@@ -5,7 +5,7 @@ import time
 import json
 from typing import Dict, List
 from selenium import webdriver
-from CONFIG import CONFIG
+from CONFIG import LOCATION
 from CONSTANTS import GET_AVAILABLE_APPOINTMENTS
 from driver_utils.utils import filter_perf_logs, get_all_elements_of_web_element, wait_for_page_to_load, log_filter
 from selenium.webdriver.common.by import By
@@ -14,7 +14,9 @@ from selenium.webdriver.remote.webelement import WebElement
 
 '''Class selectors'''
 ICBC_LOCATION_RESULTS_CLASS = "results-title"
-ICBC_LOCATION_AVAILIBILITY_CLASS = "location-title"
+ICBC_LOCATION_TITLE_CLASS = "location-title"
+ICBC_LOCATION_RESULTS_PAGE_BACK_BUTTON_CLASS = "mat-button-wrapper"
+ICBC_LOCATION_DEPARTMENT_NAME_CLASS = "department-title"
 
 '''ID SELECTORS'''
 LOCATION_FIELD_ID = "mat-input-3"
@@ -39,7 +41,7 @@ def search_for_bookings(driver: webdriver.Chrome):
 
     # Enter location into the form
     location_field = driver.find_element_by_xpath(f"//input[@{LOCATION_SELECTOR}]")
-    location_field.send_keys(CONFIG["location"])
+    location_field.send_keys(LOCATION)
     
     # Have to manually add delay and some inputs to display autocomplete box
     time.sleep(1)
@@ -54,7 +56,7 @@ def search_for_bookings(driver: webdriver.Chrome):
     time.sleep(1)
     autocomplete_results = get_all_elements_of_web_element(autocomplete)
     if len(autocomplete_results) == 0:
-        raise Exception(f"No location found for: {CONFIG['location']}")
+        raise Exception(f"No location found for: {LOCATION}")
     autocomplete_results[0].click()
     
     # Click the search button
@@ -62,7 +64,7 @@ def search_for_bookings(driver: webdriver.Chrome):
 
 
 
-def parse_icbc_locations_results(driver: webdriver.Chrome) -> List[WebElement]:
+def parse_icbc_locations_results(driver: webdriver.Chrome) -> Dict[str, WebElement]:
     """Searches for bookings based on config
 
     Args:
@@ -82,7 +84,13 @@ def parse_icbc_locations_results(driver: webdriver.Chrome) -> List[WebElement]:
     # Throw away the first element
     results_arr = results_arr[1:]
     
-    return results_arr
+    # Convert to dictionary with key of location name and webelement values
+    results_dict = {}
+    for web_element in results_arr:
+        key = web_element.find_element(By.CLASS_NAME, ICBC_LOCATION_DEPARTMENT_NAME_CLASS).text
+        results_dict[key] = web_element
+    
+    return results_dict
     
 
 def get_icbc_location_availability(driver: webdriver.Chrome, element: WebElement) -> List[Dict]:

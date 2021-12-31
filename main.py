@@ -18,6 +18,8 @@ search_for_bookings(driver)
 # Parse location results
 location_results = parse_icbc_locations_results(driver)
 
+breakpoint()
+
 # Check one of the location's availability
 availabilty = get_icbc_location_availability(driver, location_results[1])
 
