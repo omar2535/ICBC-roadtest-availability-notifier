@@ -27,6 +27,7 @@ and add a configuration similar to the one provided below:
 ```py
 '''GLOBAL CONFIGURATION FILE'''
 DEBUG = False
+PERIODIC_DELAY = 300 # in seconds
 
 '''For credentials'''
 
@@ -55,6 +56,8 @@ PREFERRED_BEFORE_DATE = '2022-12-31'
 '''For email notification'''
 
 # FOLLOW THE GUIDE HERE TO SETUP A GMAIL ACC: https://towardsdatascience.com/e-mails-notification-bot-with-python-4efa227278fb
+
+SEND_EMAIL_NOTIF = True
 
 #Email Account
 email_sender_account = "<GMAIL_ADDRESS>"

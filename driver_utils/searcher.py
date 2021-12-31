@@ -15,7 +15,6 @@ from selenium.webdriver.remote.webelement import WebElement
 '''Class selectors'''
 ICBC_LOCATION_RESULTS_CLASS = "results-title"
 ICBC_LOCATION_TITLE_CLASS = "location-title"
-ICBC_LOCATION_RESULTS_PAGE_BACK_BUTTON_CLASS = "mat-button-wrapper"
 ICBC_LOCATION_DEPARTMENT_NAME_CLASS = "department-title"
 
 '''ID SELECTORS'''
@@ -28,6 +27,7 @@ LOCATION_SELECTOR = "id=\"mat-input-3\""
 '''CSS SELECTORS'''
 SEARCH_BUTTON_CSS_SELECTOR = ".mat-raised-button.mat-button-base.mat-accent.search-button"
 ICBC_LOCATION_RESULTS_CSS_SELECTOR = ".results-title.ng-star-inserted"
+ICBC_LOCATION_RESULTS_PAGE_BACK_BUTTON_CSS_SELECTOR = ".mat-stroked-button.mat-button-base.mat-accent.ng-star-inserted"
 
 def search_for_bookings(driver: webdriver.Chrome):
     """Searches for bookings based on config
@@ -120,3 +120,12 @@ def get_icbc_location_availability(driver: webdriver.Chrome, element: WebElement
     
     # Return the body which contains availabilities
     return json.loads(response_body['body'])
+
+
+def click_back_to_location_results_page(driver: webdriver.Chrome):
+    """Clicks the back button on the ICBC results page
+
+    Args:
+        driver (webdriver.Chrome): Chrome web driver
+    """
+    driver.find_element_by_css_selector(ICBC_LOCATION_RESULTS_PAGE_BACK_BUTTON_CSS_SELECTOR).click()

@@ -5,6 +5,8 @@ from typing import Dict, List
 from CONFIG import *
 
 def notify_by_email(matching_appointments: List[Dict]):
+    if not SEND_EMAIL_NOTIF:
+        return
     
     server = smtplib.SMTP(email_smtp_server,email_smtp_port)
     server.starttls()
