@@ -24,12 +24,12 @@ def notify_by_email(matching_appointments: List[Dict]):
     server.quit()
         
 def create_email_body(matching_appointments: List[Dict]) -> str:
-    body = ""
-    for appointment in matching_appointments:
-        body += f"""--------------------------------------------------------
-                    Date: {appointment['appointmentDt']['date']}\
-                    Day of week: {appointment['appointmentDt']['dayOfWeek']}
-                    Start time: {appointment['startTm']}
-                    End time: {appointment['endTm']}
-                    --------------------------------------------------------"""
+    body = "<h1>Available appointments</h1>"
+    for index, appointment in enumerate(matching_appointments):
+        body += f"<h3>Appointment #:{index}</h3>"
+        body += f"<strong> Date: </strong> {appointment['appointmentDt']['date']} <br>"
+        body += f"<strong>Day of week: </strong> {appointment['appointmentDt']['dayOfWeek']} <br>"
+        body += f"<strong>Start time: </strong> {appointment['startTm']} <br>"
+        body += f"<strong>End time: </strong> {appointment['endTm']} <br>"
+        body += f"-------------------------------------------------------- <br>"
     return body
