@@ -49,7 +49,7 @@ ICBC_CENTER = "Vancouver driver licensing (Point Grey)"
 # Preferred days of the week that you can do your test on
 PREFERRED_DAYS = ["Monday", "Wednesday", "Friday"]
 
-# Preferred times as a tuple
+# Preferred times as a list of tuples
 PREFERRED_TIMES = [('09:00', '11:00'), ('12:00', '17:00')]
 
 # Preferred before what date
@@ -57,7 +57,8 @@ PREFERRED_BEFORE_DATE = '2022-12-31'
 
 '''For email notification'''
 
-# FOLLOW THE GUIDE HERE TO SETUP A GMAIL ACC: https://towardsdatascience.com/e-mails-notification-bot-with-python-4efa227278fb
+# FOLLOW THE GUIDE HERE TO SETUP A GMAIL ACCOUNT:
+# https://towardsdatascience.com/e-mails-notification-bot-with-python-4efa227278fb
 
 SEND_EMAIL_NOTIF = True
 
